@@ -2,6 +2,7 @@ function createLabel(tagName,content,attrName,attrValue,eventType,eventValue) {
     const label = document.createElement(tagName);
     label.innerText = content;
     label.setAttribute(attrName,attrValue);
+    // label.setAttribute(eventType,eventValue);
     label.setAttribute(eventType,eventValue);
     return label;
 }
@@ -20,41 +21,42 @@ const eight     = createLabel("button","8","class","grid-item","type","button","
 const nine      = createLabel("button","9","class","grid-item","type","button","onclick", "appendToDisplay('9')");
 const zero      = createLabel("button","0","class","grid-item","type","button","onclick", "appendToDisplay('0')");
 const zeroDbl   = createLabel("button","00","class","grid-item","type","button","onclick","appendToDisplay('00')");
+
 const plus      = createLabel("button","+","class","grid-item-plus","type","button","onclick", "appendToDisplay('+')");
 const minus     = createLabel("button","-","class","grid-item","type","button","onclick", "appendToDisplay('-')");
 const multiply  = createLabel("button","*","class","grid-item","type","button","onclick", "appendToDisplay('*')");
 const divide    = createLabel("button","/","class","grid-item","type","button","onclick", "appendToDisplay('/')");
-const result     = createLabel("button","=","class","grid-item-equal","type","button","onclick","calculate()");
+
+const result    = createLabel("button","=","class","grid-item-equal","type","button","onclick","calculate()");
 const clear     = createLabel("button","AC","class","grid-item","type","button","onclick","clearDisplay()");
 const dot       = createLabel("button",".","class","grid-item","type","button","onclick", "appendToDisplay('.')");
 
-buttons.append( one,two,three,minus,clear,
-                four,five,six,multiply,plus,
-                seven,eight,nine,divide,
-                zeroDbl,zero,dot,result)
+buttons.append( one,two,three,minus,clear,four,five,six,multiply,plus,seven,eight,nine,divide,zeroDbl,zero,dot,result)
 main.append(outputDisplay,buttons)
 
 document.body.append(main)
 main.className = "grid-container";
 buttons.className = "buttonsArea";
-plus.id = "plus" ;
-result.id = "result" ;
+plus.id = "add" ;
+minus.id = "subtract";
+result.id = "equal" ;
 clear.id = "clear";
-outputDisplay.id = "outputDisplay";
+outputDisplay.id = "result";
 outputDisplay.type = "text";
-let display = document.getElementById("outputDisplay").readOnly = true;
+let display = document.getElementById("result").readOnly = true;
+let btn = document.getElementsByTagName("button")
 
 
-let expression = "0";
+let expression = " ";
 
 function appendToDisplay(char) {
     expression += char;
     updateDisplay();
 }
-one.addEventListener("click",function appendToDisplay(char){
-    expression += char;
-    updateDisplay();
-})
+// btn.addEventListener("click",function appendToDisplay(char){
+//     expression += char;
+//     updateDisplay();
+// })
 
 clear.addEventListener("click",function clearDisplay() {
     expression = "";
@@ -72,7 +74,7 @@ result.addEventListener("click",function calculate(){
 })
 
 function updateDisplay() {
-    document.getElementById("outputDisplay").value = expression;
+    document.getElementById("result").value = expression;
 }
 
 // Event listener for keyboard events
