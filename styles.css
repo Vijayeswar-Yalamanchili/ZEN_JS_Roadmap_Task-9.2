@@ -6,8 +6,8 @@
 
 #main{
     display: grid;
-    width: 350px;
-    height: 350px;
+    width: 340px;
+    height: 340px;
     border-radius: 10px;
     padding: 10px;
     background-color: aqua;
@@ -15,6 +15,20 @@
     top: 20%;
     left: 35%;
     row-gap: 10px;
+}
+
+#outputDisplay{
+    grid-column-start: 1;
+    grid-column-end: 6;
+    width: 320px;   
+}
+
+.buttonsArea{
+    width: 100%;
+    gap: 10px;
+    font-size: larger;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
 }
 
 .grid-item{
@@ -29,28 +43,20 @@
     border: 2px solid red;
     border-radius: 5px;
     height: 55px;
-    padding-top: 10px;
-    padding-left: 15px;
+    align-items: end;
 }
 
-.buttonsArea{
-    gap: 10px;
-    font-size: larger;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-}
-
-#outputDisplay{
-    grid-column-start: 1;
-    grid-column-end: 6;
-}
-#plus{
+.grid-item-plus{
+    border: 2px solid red;
+    border-radius: 5px;
     grid-column-start: 5;
     grid-row-start: 2;
     grid-row-end: 4;
 }
-#equal{
+.grid-item-equal{
+    border: 2px solid red;
+    border-radius: 5px;
     grid-column-start: 4;
     grid-row-start: 4;
-    grid-column-end: 6;    
+    grid-column-end: 6; 
 }
