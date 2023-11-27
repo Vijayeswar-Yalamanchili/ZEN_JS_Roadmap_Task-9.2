@@ -1,127 +1,76 @@
-function createLabel(tagName,content,attrName,attrValue,eventType,eventValue) {
+function createLabel(tagName,content,attrName,attrValue,id,idValue) {
     const label = document.createElement(tagName);
     label.innerText = content;
     label.setAttribute(attrName,attrValue);
-    // label.setAttribute(eventType,eventValue);
-    label.setAttribute(eventType,eventValue);
+    label.setAttribute(id,idValue);
     return label;
 }
-const main       = createLabel("div","","id","main");
-const outputDisplay = createLabel("input","0","class","grid-item-display");
-const buttons     = createLabel("div","","id","buttons");
+// function createLabel(tagName,content,attrName,attrValue) {
+//     const label = document.createElement(tagName);
+//     label.innerText = content;
+//     label.setAttribute(attrName,attrValue);
+//     return label;
+// }
 
-const one       = createLabel("button","1","class","grid-item","type","button","onclick", "appendToDisplay('1')");
-const two       = createLabel("button","2","class","grid-item","type","button","onclick", "appendToDisplay('2')");
-const three     = createLabel("button","3","class","grid-item","type","button","onclick", "appendToDisplay('3')");
-const four      = createLabel("button","4","class","grid-item","type","button","onclick", "appendToDisplay('4')");
-const five      = createLabel("button","5","class","grid-item","type","button","onclick", "appendToDisplay('5')");
-const six       = createLabel("button","6","class","grid-item","type","button","onclick", "appendToDisplay('6')");
-const seven     = createLabel("button","7","class","grid-item","type","button","onclick", "appendToDisplay('7')");
-const eight     = createLabel("button","8","class","grid-item","type","button","onclick", "appendToDisplay('8')");
-const nine      = createLabel("button","9","class","grid-item","type","button","onclick", "appendToDisplay('9')");
-const zero      = createLabel("button","0","class","grid-item","type","button","onclick", "appendToDisplay('0')");
-const zeroDbl   = createLabel("button","00","class","grid-item","type","button","onclick","appendToDisplay('00')");
+const division        = createLabel("div","","class","grid-container","id","calculator");
+const outputDisplay   = createLabel("div","","class","displayDiv","id","outputDisplay");
+const buttonsDiv         = createLabel("div","","class","buttonsDiv","id","buttons");
+const displayInput    = createLabel("input","","id","display")
 
-const plus      = createLabel("button","+","class","grid-item-plus","type","button","onclick", "appendToDisplay('+')");
-const minus     = createLabel("button","-","class","grid-item","type","button","onclick", "appendToDisplay('-')");
-const multiply  = createLabel("button","*","class","grid-item","type","button","onclick", "appendToDisplay('*')");
-const divide    = createLabel("button","/","class","grid-item","type","button","onclick", "appendToDisplay('/')");
+const result          = createLabel("button","=","id","=");
+const buttonAC        = createLabel("button","AC","id","ac");
+const buttonDel       = createLabel("button","Del","id","del");
+const buttonDot       = createLabel("button",".","id",".");
+const buttonDivide    = createLabel("button","/","id","/");
+const buttonPlus      = createLabel("button","+","id","+");
+const buttonSubtract  = createLabel("button","-","id","-");
+const buttonMultiply  = createLabel("button","*","id","*");
 
-const result    = createLabel("button","=","class","grid-item-equal","type","button","onclick","calculate()");
-const clear     = createLabel("button","AC","class","grid-item","type","button","onclick","clearDisplay()");
-const dot       = createLabel("button",".","class","grid-item","type","button","onclick", "appendToDisplay('.')");
+const buttonOne       = createLabel("button","1","id","1","class","grid-item");
+const buttonTwo       = createLabel("button","2","id","2","class","grid-item");
+const buttonThree     = createLabel("button","3","id","3","class","grid-item");
+const buttonFour      = createLabel("button","4","id","4","class","grid-item");
+const buttonFive      = createLabel("button","5","id","5","class","grid-item");
+const buttonSix       = createLabel("button","6","id","6","class","grid-item");
+const buttonSeven     = createLabel("button","7","id","7","class","grid-item");
+const buttonEight     = createLabel("button","8","id","8","class","grid-item");
+const buttonNine      = createLabel("button","9","id","9","class","grid-item");
+const buttonZero      = createLabel("button","0","id","0","class","grid-item");
+const buttonZeroDbl   = createLabel("button","00","id","00","class","grid-item");
 
-buttons.append( one,two,three,minus,clear,four,five,six,multiply,plus,seven,eight,nine,divide,zeroDbl,zero,dot,result)
-main.append(outputDisplay,buttons)
+result.classList.add("grid-item","equal","operator");
+buttonAC.classList.add("grid-item","operator");
+buttonDel.classList.add("grid-item","operator");
+buttonDot.classList.add("grid-item","operator");
+buttonDivide.classList.add("grid-item","operator");
+buttonPlus.classList.add("grid-item","operator");
+buttonSubtract.classList.add("grid-item","operator");
+buttonMultiply.classList.add("grid-item","operator");
 
-document.body.append(main)
-main.className = "grid-container";
-buttons.className = "buttonsArea";
-plus.id = "add" ;
-minus.id = "subtract";
-result.id = "equal" ;
-clear.id = "clear";
-outputDisplay.id = "result";
-outputDisplay.type = "text";
-let display = document.getElementById("result").readOnly = true;
-let btn = document.getElementsByTagName("button")
+buttonsDiv.append(buttonAC,buttonDel,buttonDot,buttonDivide,
+                buttonSeven,buttonEight,buttonNine,buttonMultiply,
+                buttonFour,buttonFive,buttonSix,buttonSubtract,
+                buttonOne,buttonTwo,buttonThree,buttonPlus,
+                buttonZeroDbl,buttonZero,result);
 
+outputDisplay.appendChild(displayInput);
+division.append(outputDisplay,buttonsDiv);
 
-let expression = " ";
+document.body.append(division);
 
-function appendToDisplay(char) {
-    expression += char;
-    updateDisplay();
-}
-// btn.addEventListener("click",function appendToDisplay(char){
-//     expression += char;
-//     updateDisplay();
-// })
+const display = document.querySelector("#display");
+const buttons = document.querySelectorAll("button");
 
-clear.addEventListener("click",function clearDisplay() {
-    expression = "";
-    updateDisplay();
-})
-
-result.addEventListener("click",function calculate(){
-    try {
-        const result = eval(expression);
-        expression = result.toString();
-        updateDisplay();
-    } catch (error) {
-        alert("Invalid expression");
-    }
-})
-
-function updateDisplay() {
-    document.getElementById("result").value = expression;
-}
-
-// Event listener for keyboard events
-document.addEventListener("keydown", function (event) {
-    const key = event.key;
-    if (/[\d+\-*/%.]/.test(key)) {
-        appendToDisplay(key);
-    } else if (key === "Enter") {
-        calculate();
-    } else {
-        alert("Only numbers and operators are allowed");
-    }
+buttons.forEach((btn) => {
+    btn.addEventListener("click",()=>{
+        if(btn.id === "="){
+            display.value = eval(display.value);
+        } else if(btn.id === "ac"){
+            display.value = "";
+        } else if(btn.id === "del"){
+            display.value = display.value.slice(0,-1);
+        } else{
+            display.value += btn.id
+        }
+    });
 });
-
-
-
-
-
-
-
-// document.addEventListener('keydown', function (event) {
-//     if (event.key.match(/[0-9]|\.|[+\-*/%]/)) {
-//         appendToDisplay(event.key);
-//     } else {
-//         alert('Only numbers are allowed');
-//     }
-// });
-
-// function appendToDisplay(value) {
-//     document.getElementById('outputDisplay').value += value;
-// }
-
-// function clearDisplay() {
-//     document.getElementById('outputDisplay').value = '';
-// }
-
-// function deleteLast() {
-//     var currentValue = document.getElementById('display').value;
-//     document.getElementById('display').value = currentValue.slice(0, -1);
-// }
-
-// function calculate() {
-//     var expression = document.getElementById('outputDisplay').value;
-//     try {
-//         var result = eval(expression);
-//         document.getElementById('outputDisplay').value = result;
-//     } catch (error) {
-//         alert('Invalid expression');
-//     }
-// }
