@@ -1,3 +1,4 @@
+//creating elements
 function createLabel(tagName,content,attrName,attrValue,id,idValue) {
     const label = document.createElement(tagName);
     label.innerText = content;
@@ -5,12 +6,6 @@ function createLabel(tagName,content,attrName,attrValue,id,idValue) {
     label.setAttribute(id,idValue);
     return label;
 }
-// function createLabel(tagName,content,attrName,attrValue) {
-//     const label = document.createElement(tagName);
-//     label.innerText = content;
-//     label.setAttribute(attrName,attrValue);
-//     return label;
-// }
 
 const division        = createLabel("div","","class","grid-container","id","calculator");
 const outputDisplay   = createLabel("div","","class","displayDiv","id","outputDisplay");
@@ -49,6 +44,7 @@ buttonMultiply.classList.add("grid-item","operator");
 buttonPlus.setAttribute("value","+");
 buttonSubtract.setAttribute("value","-");
 
+//append to document
 buttonsDiv.append(buttonAC,buttonDel,buttonDot,buttonDivide,
                 buttonSeven,buttonEight,buttonNine,buttonMultiply,
                 buttonFour,buttonFive,buttonSix,buttonSubtract,
@@ -60,6 +56,8 @@ division.append(outputDisplay,buttonsDiv);
 
 document.body.append(division);
 
+
+//execution code
 const display = document.querySelector("#result");
 const buttons = document.querySelectorAll("button");
 
